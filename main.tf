@@ -101,8 +101,8 @@ resource "aws_route_table" "private_route" {
 
   # Default route through NAT
   route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = element(aws_nat_gateway.nat.*.id, count.index)
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = element(aws_nat_gateway.nat.*.id, count.index)
   }
 
   tags = merge(map("Name", format("%v-private-route-table-%v", var.vpc_name, var.aws_zones[count.index])), var.tags)
